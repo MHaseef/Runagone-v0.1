@@ -1,0 +1,8 @@
+{
+  "name": "Runagone",
+  "description": "A GPS-based territory control game for runners. Capture zones, build fortresses, and dominate your local streets.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

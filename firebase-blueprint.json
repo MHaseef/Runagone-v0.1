@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Player": {
+      "title": "Player",
+      "description": "User profile and detailed fitness analytics",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "tag": { "type": "string" },
+        "factionColor": { "type": "string" },
+        "totalArea": { "type": "number", "description": "Total square meters controlled" },
+        "totalSteps": { "type": "number" },
+        "healthScore": { "type": "number", "description": "Calculated based on frequency and intensity" },
+        "avgPace": { "type": "string" },
+        "territoriesCaptured": { "type": "number" },
+        "lastActive": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "tag", "factionColor"]
+    },
+    "Territory": {
+      "title": "Territory",
+      "description": "A captured polygon area with stack metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerTag": { "type": "string" },
+        "color": { "type": "string" },
+        "points": { 
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "stackHeight": { "type": "number", "description": "LIFO layers representing defense HP" },
+        "area": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "points", "color", "stackHeight", "area"]
+    }
+  },
+  "firestore": {
+    "/players/{uid}": {
+      "schema": "Player",
+      "description": "User profiles and aggregate stats"
+    },
+    "/territories/{id}": {
+      "schema": "Territory",
+      "description": "The global game board"
+    }
+  }
+}
